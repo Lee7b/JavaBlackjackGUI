@@ -103,7 +103,7 @@ public class BlackjackGUI extends JFrame
 					infoText.setText("You're already playing a hand.");
 					return;
 				}
-				if (getBet() >= 10) //If user has not bet yet, start the hand if minimum bet is given
+				if (isNumeric(enterBetJTF.getText()) && getBet() >= 10) //If user has not bet yet, start the hand if minimum bet is given
 				{
 					gameStarted = true;
 					playGame();
@@ -229,10 +229,21 @@ public class BlackjackGUI extends JFrame
 	
 	public double getBet() //Returns the user's bet
 	{
-		if (!enterBetJTF.getText().isEmpty()) //If the text box for user bet is not empty, store the bet in userBet variable
+		if (!enterBetJTF.getText().isEmpty()) //If the text box for user bet is not empty and contains numeric digits, store the bet in userBet variable
+		{
 			userBet = Double.parseDouble(enterBetJTF.getText());
-		
+		}
+
 		return userBet;
+	}
+	
+	public boolean isNumeric(String s)
+	{
+		if (s.matches("\\d+"))
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean isBusted(BlackjackHand h)

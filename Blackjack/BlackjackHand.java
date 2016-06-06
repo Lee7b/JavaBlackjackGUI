@@ -1,6 +1,4 @@
 package Blackjack;
-import Blackjack.Card;
-import Blackjack.Hand;
 
 public class BlackjackHand extends Hand
 {
