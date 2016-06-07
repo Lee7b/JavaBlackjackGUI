@@ -39,7 +39,7 @@ public class Hand
 	
 	public ImageIcon getImage(BlackjackHand h, int position)
 	{
-		ImageIcon cardImage = new ImageIcon("src/cards/" + h.getCardAt(position).toString() + ".gif");
+		ImageIcon cardImage = new ImageIcon("cards/" + h.getCardAt(position).toString() + ".gif");
 		return cardImage;
 	}
 

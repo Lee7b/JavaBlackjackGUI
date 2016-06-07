@@ -199,7 +199,7 @@ public class BlackjackGUI extends JFrame
 		contentPane.add(btnDouble);
 		
 		JLabel lblBackgroundImage = new JLabel("");
-		lblBackgroundImage.setIcon(new ImageIcon("src/cards/table.jpg"));
+		lblBackgroundImage.setIcon(new ImageIcon("cards/table.jpg"));
 		lblBackgroundImage.setBounds(0, 0, 761, 517);
 		contentPane.add(lblBackgroundImage);
 	}
@@ -315,7 +315,7 @@ public class BlackjackGUI extends JFrame
 		{
 			if (position == 0)
 			{
-				dealerCardPanel.add(new JLabel(new ImageIcon("src/cards/Back.gif"))); //Hide the dealer's first card
+				dealerCardPanel.add(new JLabel(new ImageIcon("cards/Back.gif"))); //Hide the dealer's first card
 				dealerCardPanel.repaint();//Update the JFrame
 			}
 			else
