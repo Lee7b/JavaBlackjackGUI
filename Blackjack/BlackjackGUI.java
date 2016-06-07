@@ -17,11 +17,7 @@ import java.awt.Font;
 
 public class BlackjackGUI extends JFrame
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	private JPanel userCardPanel;
 	private JPanel dealerCardPanel;
 	private JTextField enterBetJTF;
@@ -42,7 +38,7 @@ public class BlackjackGUI extends JFrame
 	 */
 	
 	public BlackjackGUI() {
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 128, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);		
@@ -240,20 +236,20 @@ public class BlackjackGUI extends JFrame
 	
 	public boolean isNumeric(String s)
 	{
-		if (s.matches("\\d+"))
+		if (s.matches("\\d+")) //If s only contains numeric values return true
 		{
 			return true;
 		}
-		return false;
+		return false; //Else, return false
 	}
 	
 	public boolean isBusted(BlackjackHand h)
 	{
-		if (h.getBlackjackValue() > 21)
+		if (h.getBlackjackValue() > 21) //If the hand we are checking is busted return true
 		{
 			return true;
 		}
-		return false;
+		return false; //Else return false
 	}
 
 	public void dealerTurn() //Do the dealer's turn and compare hands
@@ -263,7 +259,7 @@ public class BlackjackGUI extends JFrame
 			doHit(dealerHand);
 		}
 		
-		doPayouts();
+		doPayouts(); //Compare the user's hand and the dealer's hand and do payouts
 	}
 	
 	public void doHit(Hand h) //Give a card if hitting
@@ -358,13 +354,13 @@ public class BlackjackGUI extends JFrame
 			dealerWins = true;
 			infoText.setText("Sorry, you had a tie, therefore you lost");
 		}
-		if (userWins == true) //If user wins the hand
+		if (userWins) //If user wins the hand
 		{
 			userMoney += userBet;
 			updateMoney(userMoney);
 			newGame();
 		}
-		if (dealerWins == true) //If dealer wins the hand
+		if (dealerWins) //If dealer wins the hand
 		{
 			userMoney -= userBet;
 			updateMoney(userMoney);
