@@ -1,8 +1,6 @@
 package Blackjack;
 
-import java.awt.Image;
 import java.util.Vector;
-
 import javax.swing.ImageIcon;
 
 public class Hand

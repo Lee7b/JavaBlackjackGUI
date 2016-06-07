@@ -17,6 +17,10 @@ import java.awt.Font;
 
 public class BlackjackGUI extends JFrame
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel userCardPanel;
 	private JPanel dealerCardPanel;
@@ -38,20 +42,28 @@ public class BlackjackGUI extends JFrame
 	 */
 	
 	public BlackjackGUI() {
-		setTitle("Sam's House of Blackjack");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 767, 546);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 128, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);		
 		contentPane.setLayout(null);
+		
+		moneyLeftJTF = new JTextField();
+		moneyLeftJTF.setEditable(false);
+		moneyLeftJTF.setBounds(393, 14, 86, 20);
+		contentPane.add(moneyLeftJTF);
+		moneyLeftJTF.setColumns(10);
+		
+		enterBetJTF = new JTextField();
+		enterBetJTF.setBounds(75, 14, 86, 20);
+		contentPane.add(enterBetJTF);
+		enterBetJTF.setColumns(10);
 	
 		infoText = new JTextArea();
 		infoText.setEditable(false);
 		infoText.setText("Welcome! Please place your bet.");
 		infoText.setBackground(new Color(211, 211, 211));
-		infoText.setBounds(155, 451, 451, 55);
+		infoText.setBounds(155, 451, 451, 66);
 		contentPane.add(infoText);
 		
 		JLabel lblEnterBet = new JLabel("Enter Bet:");
@@ -60,23 +72,23 @@ public class BlackjackGUI extends JFrame
 		lblEnterBet.setBounds(10, 10, 82, 26);
 		contentPane.add(lblEnterBet);
 		
-		enterBetJTF = new JTextField();
-		enterBetJTF.setBounds(75, 14, 86, 20);
-		contentPane.add(enterBetJTF);
-		enterBetJTF.setColumns(10);
+		JLabel lblCurrentMoney = new JLabel("Current Money: ");
+		lblCurrentMoney.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblCurrentMoney.setBounds(291, 11, 109, 26);
+		contentPane.add(lblCurrentMoney);
 		
 		JPanel userCardPanelBorder = new JPanel();
 		userCardPanelBorder.setOpaque(false);
 		userCardPanelBorder.setBackground(new Color(0, 128, 0));
 		userCardPanelBorder.setBorder(new TitledBorder(null, "User", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		userCardPanelBorder.setBounds(61, 77, 593, 143);
+		userCardPanelBorder.setBounds(61, 77, 635, 143);
 		contentPane.add(userCardPanelBorder);
 		userCardPanelBorder.setLayout(null);
 		
 		userCardPanel = new JPanel();
 		userCardPanel.setOpaque(false);
 		userCardPanel.setBackground(new Color(0, 128, 0));
-		userCardPanel.setBounds(6, 16, 581, 120);
+		userCardPanel.setBounds(6, 16, 619, 120);
 		userCardPanelBorder.add(userCardPanel);
 		userCardPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -84,14 +96,14 @@ public class BlackjackGUI extends JFrame
 		dealerCardPanelBorder.setOpaque(false);
 		dealerCardPanelBorder.setBackground(new Color(0, 128, 0));
 		dealerCardPanelBorder.setBorder(new TitledBorder(null, "Dealer", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		dealerCardPanelBorder.setBounds(61, 223, 593, 143);
+		dealerCardPanelBorder.setBounds(61, 223, 635, 143);
 		contentPane.add(dealerCardPanelBorder);
 		dealerCardPanelBorder.setLayout(null);
 		
 		dealerCardPanel = new JPanel();
 		dealerCardPanel.setOpaque(false);
 		dealerCardPanel.setBackground(new Color(0, 128, 0));
-		dealerCardPanel.setBounds(6, 16, 581, 120);
+		dealerCardPanel.setBounds(6, 16, 619, 120);
 		dealerCardPanelBorder.add(dealerCardPanel);
 		
 		JButton btnSubmit = new JButton("Submit");
@@ -116,18 +128,7 @@ public class BlackjackGUI extends JFrame
 		});
 		btnSubmit.setBounds(171, 13, 89, 23);
 		contentPane.add(btnSubmit);
-		
-		JLabel lblCurrentMoney = new JLabel("Current Money: ");
-		lblCurrentMoney.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblCurrentMoney.setBounds(291, 11, 109, 26);
-		contentPane.add(lblCurrentMoney);
-		
-		moneyLeftJTF = new JTextField();
-		moneyLeftJTF.setEditable(false);
-		moneyLeftJTF.setBounds(393, 14, 86, 20);
-		contentPane.add(moneyLeftJTF);
-		moneyLeftJTF.setColumns(10);
-		
+
 		JButton btnHit = new JButton("Hit");
 		btnHit.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnHit.setToolTipText("Add a card to your hand");
@@ -203,7 +204,7 @@ public class BlackjackGUI extends JFrame
 		
 		JLabel lblBackgroundImage = new JLabel("");
 		lblBackgroundImage.setIcon(new ImageIcon("src/cards/table.jpg"));
-		lblBackgroundImage.setBounds(0, 0, 751, 506);
+		lblBackgroundImage.setBounds(0, 0, 761, 517);
 		contentPane.add(lblBackgroundImage);
 	}
 	
@@ -312,20 +313,22 @@ public class BlackjackGUI extends JFrame
 		if (ID == 0) //If ID == 0, we are drawing a card in the userCardPanel
 		{
 			userCardPanel.add(new JLabel(userHand.getImage(userHand, position)));
+			userCardPanel.repaint();
 		}
 		else if (ID == 1) //If ID == 1, we are drawing a card in the dealerCardPanel
 		{
 			if (position == 0)
 			{
 				dealerCardPanel.add(new JLabel(new ImageIcon("src/cards/Back.gif"))); //Hide the dealer's first card
+				dealerCardPanel.repaint();//Update the JFrame
 			}
 			else
 			{
 				dealerCardPanel.add(new JLabel(dealerHand.getImage(dealerHand, position)));
+				dealerCardPanel.repaint();//Update the JFrame
 			}
 		}
 		
-		repaint(); //Update the JFrame
 	}
 
 	public void doPayouts()
@@ -383,8 +386,12 @@ public class BlackjackGUI extends JFrame
 	{
 		final int STARTINGMONEY = 1000;
 		BlackjackGUI game = new BlackjackGUI();
+		
 		game.setVisible(true);
+		game.setTitle("Sam's House of Blackjack");
+		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		game.setResizable(false);
+		game.setBounds(100, 100, 767, 546);
 		game.updateMoney(STARTINGMONEY); //Display starting money
 	}
 }
-
