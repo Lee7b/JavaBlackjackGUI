@@ -14,8 +14,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Insets;
 
-public class BlackjackGUI extends JFrame
+import javax.swing.border.LineBorder;
+
+public class BlackjackGUI
 {
 	private static final long serialVersionUID = 1L;
 	private JPanel userCardPanel;
@@ -32,16 +35,12 @@ public class BlackjackGUI extends JFrame
 	private BlackjackHand userHand = new BlackjackHand();
 	private BlackjackHand dealerHand = new BlackjackHand();
 	private Deck deck = new Deck();
-	
-	/**
-	 * Create the frame.
-	 */
-	
-	public BlackjackGUI() {
+
+	public BlackjackGUI(JFrame frame) {
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 128, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);		
+		frame.setContentPane(contentPane);		
 		contentPane.setLayout(null);
 		
 		moneyLeftJTF = new JTextField();
@@ -125,7 +124,13 @@ public class BlackjackGUI extends JFrame
 		btnSubmit.setBounds(171, 13, 89, 23);
 		contentPane.add(btnSubmit);
 
-		JButton btnHit = new JButton("Hit");
+		JButton btnHit = new JButton("");
+		btnHit.setBorder(new LineBorder(new Color(0, 0, 0), 1
+				));
+		btnHit.setContentAreaFilled(false);
+		btnHit.setBorderPainted(true);
+		btnHit.setFocusPainted(false);
+		btnHit.setIcon(new ImageIcon("cards/hit.png"));
 		btnHit.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnHit.setToolTipText("Add a card to your hand");
 		btnHit.setForeground(Color.BLACK);
@@ -141,10 +146,14 @@ public class BlackjackGUI extends JFrame
 				}
 			}
 		});
-		btnHit.setBounds(122, 394, 109, 32);
+		btnHit.setBounds(61, 394, 137, 32);
 		contentPane.add(btnHit);
 		
-		JButton btnStand = new JButton("Stand");
+		JButton btnStand = new JButton("");
+		btnStand.setBorder(new LineBorder(new Color(0, 0, 0)));
+		btnStand.setContentAreaFilled(false);
+		btnStand.setFocusPainted(false);
+		btnStand.setIcon(new ImageIcon("cards/stand.png"));
 		btnStand.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnStand.setToolTipText("End turn");
 		btnStand.addActionListener(new ActionListener() {
@@ -159,10 +168,14 @@ public class BlackjackGUI extends JFrame
 				}
 			}
 		});
-		btnStand.setBounds(251, 394, 109, 32);
+		btnStand.setBounds(225, 394, 137, 32);
 		contentPane.add(btnStand);
 		
-		JButton btnSurrender = new JButton("Surrender");
+		JButton btnSurrender = new JButton("");
+		btnSurrender.setContentAreaFilled(false);
+		btnSurrender.setFocusPainted(false);
+		btnSurrender.setBorder(new LineBorder(new Color(0, 0, 0)));
+		btnSurrender.setIcon(new ImageIcon("cards/surrender.png"));
 		btnSurrender.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSurrender.setToolTipText("If you surrender, you lose half of your bet");
 		btnSurrender.addActionListener(new ActionListener() {
@@ -177,10 +190,14 @@ public class BlackjackGUI extends JFrame
 				}
 			}
 		});
-		btnSurrender.setBounds(384, 394, 109, 32);
+		btnSurrender.setBounds(559, 394, 137, 32);
 		contentPane.add(btnSurrender);
 		
-		JButton btnDouble = new JButton("Double");
+		JButton btnDouble = new JButton("");
+		btnDouble.setContentAreaFilled(false);
+		btnDouble.setFocusPainted(false);
+		btnDouble.setBorder(new LineBorder(new Color(0, 0, 0)));
+		btnDouble.setIcon(new ImageIcon("cards/double.png"));
 		btnDouble.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnDouble.setToolTipText("Double your bet, and get one, and only one more card");
 		btnDouble.addActionListener(new ActionListener() {
@@ -195,13 +212,15 @@ public class BlackjackGUI extends JFrame
 				}
 			}
 		});
-		btnDouble.setBounds(516, 394, 109, 32);
+		btnDouble.setBounds(393, 394, 137, 32);
 		contentPane.add(btnDouble);
 		
 		JLabel lblBackgroundImage = new JLabel("");
 		lblBackgroundImage.setIcon(new ImageIcon("cards/table.jpg"));
 		lblBackgroundImage.setBounds(0, 0, 761, 517);
 		contentPane.add(lblBackgroundImage);
+		
+		frame.repaint(); //Initial paint
 	}
 	
 	public void playGame()
@@ -376,18 +395,5 @@ public class BlackjackGUI extends JFrame
 		gameStarted = false;
 		userHand.emptyHand();
 		dealerHand.emptyHand();
-	}
-	
-	public static void main(String[] args)
-	{
-		final int STARTINGMONEY = 1000;
-		BlackjackGUI game = new BlackjackGUI();
-		
-		game.setVisible(true);
-		game.setTitle("Sam's House of Blackjack");
-		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game.setResizable(false);
-		game.setBounds(100, 100, 767, 546);
-		game.updateMoney(STARTINGMONEY); //Display starting money
 	}
 }
