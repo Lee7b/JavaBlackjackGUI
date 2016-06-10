@@ -17,6 +17,7 @@ import java.awt.Font;
 import java.awt.Insets;
 
 import javax.swing.border.LineBorder;
+import javax.swing.UIManager;
 
 public class BlackjackGUI
 {
@@ -36,7 +37,8 @@ public class BlackjackGUI
 	private BlackjackHand dealerHand = new BlackjackHand();
 	private Deck deck = new Deck();
 
-	public BlackjackGUI(JFrame frame) {
+	public BlackjackGUI(JFrame frame)
+	{
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 128, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -45,7 +47,7 @@ public class BlackjackGUI
 		
 		moneyLeftJTF = new JTextField();
 		moneyLeftJTF.setEditable(false);
-		moneyLeftJTF.setBounds(393, 14, 86, 20);
+		moneyLeftJTF.setBounds(369, 14, 86, 20);
 		contentPane.add(moneyLeftJTF);
 		moneyLeftJTF.setColumns(10);
 		
@@ -67,15 +69,15 @@ public class BlackjackGUI
 		lblEnterBet.setBounds(10, 10, 82, 26);
 		contentPane.add(lblEnterBet);
 		
-		JLabel lblCurrentMoney = new JLabel("Current Money: ");
+		JLabel lblCurrentMoney = new JLabel("Money");
 		lblCurrentMoney.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblCurrentMoney.setBounds(291, 11, 109, 26);
+		lblCurrentMoney.setBounds(319, 10, 71, 26);
 		contentPane.add(lblCurrentMoney);
 		
 		JPanel userCardPanelBorder = new JPanel();
 		userCardPanelBorder.setOpaque(false);
 		userCardPanelBorder.setBackground(new Color(0, 128, 0));
-		userCardPanelBorder.setBorder(new TitledBorder(null, "User", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		userCardPanelBorder.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "You", TitledBorder.LEADING, TitledBorder.TOP, null, Color.LIGHT_GRAY));
 		userCardPanelBorder.setBounds(61, 77, 635, 143);
 		contentPane.add(userCardPanelBorder);
 		userCardPanelBorder.setLayout(null);
@@ -90,7 +92,7 @@ public class BlackjackGUI
 		JPanel dealerCardPanelBorder = new JPanel();
 		dealerCardPanelBorder.setOpaque(false);
 		dealerCardPanelBorder.setBackground(new Color(0, 128, 0));
-		dealerCardPanelBorder.setBorder(new TitledBorder(null, "Dealer", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		dealerCardPanelBorder.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dealer", TitledBorder.LEADING, TitledBorder.TOP, null, Color.LIGHT_GRAY));
 		dealerCardPanelBorder.setBounds(61, 223, 635, 143);
 		contentPane.add(dealerCardPanelBorder);
 		dealerCardPanelBorder.setLayout(null);
@@ -98,10 +100,16 @@ public class BlackjackGUI
 		dealerCardPanel = new JPanel();
 		dealerCardPanel.setOpaque(false);
 		dealerCardPanel.setBackground(new Color(0, 128, 0));
-		dealerCardPanel.setBounds(6, 16, 619, 120);
+		dealerCardPanel.setBounds(6, 11, 619, 125);
 		dealerCardPanelBorder.add(dealerCardPanel);
 		
-		JButton btnSubmit = new JButton("Submit");
+		JButton btnSubmit = new JButton("");
+		btnSubmit.setBorder(new LineBorder(new Color(0, 0, 0), 1));
+		btnSubmit.setContentAreaFilled(false);
+		btnSubmit.setBorderPainted(true);
+		btnSubmit.setFocusPainted(false);
+		btnSubmit.setIcon(new ImageIcon("cards/submit.png"));
+		
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (gameStarted == true) //If the user has already placed a bet for this hand, don't start another one
@@ -121,7 +129,7 @@ public class BlackjackGUI
 				}
 			}
 		});
-		btnSubmit.setBounds(171, 13, 89, 23);
+		btnSubmit.setBounds(171, 11, 110, 25);
 		contentPane.add(btnSubmit);
 
 		JButton btnHit = new JButton("");
